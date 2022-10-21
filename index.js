@@ -22,9 +22,14 @@ app.use("/api/carnetsEntretiens", carnetsEntretiensRoute);
 const toStandardiserRoute = require("./routes/toStandardiser/toStandardiser");
 app.use("/api/toStandardiser", toStandardiserRoute);
 
+const bdd = require("./routes/bdd/bdd");
+app.use("/api/bdd", bdd);
+
 app.get("/*", (_, resp) => {
   return resp.status(404).json({ message: "rien à voir ici..." });
 })
+
+
 
 app.listen(PORT, () => {
   console.log(`Serveur en écoute sur le port ${PORT}`)
