@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { toConnectBdd, signUp, signIn, updateUserInfos, getUserCar, updateKmUserCar, addCarToUser, createCar, createRevision, addRevisionToUser, updateRevisionStatus, updateRevisionEdl, addTacheInRevision } = require("../../mesModules/bdd/controllersBdd");
+const { toConnectBdd, signUp, signIn, updateUserInfos, getUserCar, updateKmUserCar, addCarToUser, createCar, createRevision, addRevisionToUser, updateRevisionStatus, updateRevisionEdl, addTacheInRevision, isEmailExist } = require("../../mesModules/bdd/controllersBdd");
 const { Voiture } = require("../../mesModules/bdd/models");
 
 // toutes les api devront passer par cette route, qui permet de se connecter à la bdd.
@@ -150,6 +150,15 @@ router.post("/addTacheInRevision", async (req, resp) => {
         return resp.status(500).json({ message: `Impossible d'ajouter une tâche dans l'entretien, erreur interne` });
 
     return resp.json(currentRevisionUpdated);
+});
+
+router.post("/getUserInfos", async (req, resp) => {
+    const { email } = req.body;
+
+    const userInfos = await isEmailExist(email);
+    if (!userInfos) return resp.status(500).json({ message: `Impossible de trouver les informations de cette user` });
+
+    return resp.json(userInfos);
 });
 
 module.exports = router;

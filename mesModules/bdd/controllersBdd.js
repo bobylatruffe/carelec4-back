@@ -227,6 +227,7 @@ async function addTacheInRevision(revisionId, newTache) {
     currentRevision.entretien = currentRevision.entretien.concat(newTache);
 
     try {
+        currentRevision.markModified("entretien");
         await currentRevision.save();
     } catch (err) {
         console.error(err.message);
@@ -289,5 +290,6 @@ module.exports = {
     updateRevisionStatus,
     updateRevisionEdl,
     addTacheInRevision,
-    addImgForTache
+    addImgForTache,
+    isEmailExist,
 }
