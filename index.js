@@ -1,8 +1,22 @@
 const express = require('express');
 const app = express();
-const cors = require("cors");
+const https = require("https");
+const fs = require("fs");
+const path = require("path");
+const options = {
+  key: fs.readFileSync(path.join(__dirname, './cert/key.pem')),
+  cert: fs.readFileSync(path.join(__dirname, './cert/cert.pem'))
+}
 
-app.use(cors());
+app.use((req, resp, next) => {
+  console.log("bonjour");
+  resp.setHeader('Access-Control-Allow-Origin', '*');
+  resp.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+// const cors = require("cors"); 
+// app.use(cors()); ne fonctionne plus avec httpsServer
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
@@ -29,8 +43,7 @@ app.get("/*", (_, resp) => {
   return resp.status(404).json({ message: "rien à voir ici..." });
 })
 
-
-
-app.listen(PORT, () => {
-  console.log(`Serveur en écoute sur le port ${PORT}`)
-})
+const httpsServer = https.createServer(options, app);
+httpsServer.listen(PORT, () => {
+  console.log("https server on listen " + PORT);
+});
