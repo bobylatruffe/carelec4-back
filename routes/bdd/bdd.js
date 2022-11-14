@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const { toConnectBdd, signUp, signIn, updateUserInfos, getUserCar, updateKmUserCar, addCarToUser, createCar, createRevision, addRevisionToUser, updateRevisionStatus, updateRevisionEdl, addTacheInRevision, isEmailExist } = require("../../mesModules/bdd/controllersBdd");
-const { Voiture } = require("../../mesModules/bdd/models");
+const { Voiture, Revision } = require("../../mesModules/bdd/models");
 
 // toutes les api devront passer par cette route, qui permet de se connecter à la bdd.
 // est-ce efficace ? je ne sais pas encore, je verrai bien plus tard.
@@ -150,6 +150,16 @@ router.post("/addTacheInRevision", async (req, resp) => {
         return resp.status(500).json({ message: `Impossible d'ajouter une tâche dans l'entretien, erreur interne` });
 
     return resp.json(currentRevisionUpdated);
+});
+
+router.post("/getCurrentRevision", async (req, resp) => {
+    const { revisionId } = req.body;
+
+    const currentRevision = await Revision.findById(revisionId);
+    if (!currentRevision)
+        return resp.status(500).json({ message: "Pas de révision programmée" });
+
+    return resp.json(currentRevision);
 });
 
 router.post("/getUserInfos", async (req, resp) => {
