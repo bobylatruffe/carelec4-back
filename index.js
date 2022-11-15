@@ -20,8 +20,6 @@ app.use((req, resp, next) => {
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-const PORT = 5000;
-
 // initialiser notre structure de donnée pour les préconisations constructeurs
 const { initCarnetsEntretiensSdd } = require("./mesModules/carnetsEntretiens/initCarnetsEntretiensSdd");
 initCarnetsEntretiensSdd();
@@ -44,6 +42,6 @@ app.get("/*", (_, resp) => {
 })
 
 const httpsServer = https.createServer(options, app);
-httpsServer.listen(PORT, () => {
-  console.log("https server listening on port " + PORT);
+httpsServer.listen(process.env.PORT, () => {
+  console.log(`https server listening on port ${process.env.PORT}`);
 });
