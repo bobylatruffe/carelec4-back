@@ -266,6 +266,18 @@ async function addImgForTache(revisionId, tacheIntitule, newImg) {
     return currentRevision;
 }
 
+async function getAllRevisions() {
+    let allRevisions = [];
+    try {
+        allRevisions = await Revision.find({});
+        return allRevisions;
+    } catch(err) {
+        console.error(err.message);
+        console.error("getAllRevisions() : Problème lors de la récupération des révisions programmée");
+        return null;
+    }
+}
+
 async function test() {
     if (await toConnectBdd()) {
         console.error(await signIn("bozlak.fatih@gmail.com2019926522", "w5d85qa2"));
@@ -292,4 +304,5 @@ module.exports = {
     addTacheInRevision,
     addImgForTache,
     isEmailExist,
+    getAllRevisions
 }
