@@ -45,5 +45,5 @@ app.get("/*", (_, resp) => {
 
 const httpsServer = https.createServer(options, app);
 httpsServer.listen(PORT, () => {
-  console.log("https server on listen " + PORT);
+  console.log("https server listening on port " + PORT);
 });
