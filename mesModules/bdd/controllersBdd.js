@@ -1,10 +1,11 @@
 const { disconnect } = require("mongoose");
 const { mongoose, User, Revision, Voiture } = require("./models.js");
 
+/* fonction de connexion à la base de donnée (BDD) */
 async function toConnectBdd() {
     try {
         await mongoose.connect("mongodb+srv://" + process.env.DB_USER_PASS + "@cluster0.7jbewlj.mongodb.net/carelec?retryWrites=true&w=majority");
-        // console.log("Connexion à la bdd ok")
+        // console.log("Connexion à la BDD ok")
     } catch (err) {
         throw err;
     }
@@ -12,11 +13,13 @@ async function toConnectBdd() {
     return true;
 }
 
+/* fonction de déconnexion de la BDD */
 async function toDisconnectBdd() {
     await mongoose.disconnect();
-    // console.log("Deconnectiond de la bdd ok");
+    // console.log("Déconnexion de la BDD ok");
 }
 
+/* fonction de vérification de l'existance d'une adresse email dans la BDD */
 async function isEmailExist(email) {
     let userInfos = null;
     try {
@@ -35,9 +38,10 @@ async function isEmailExist(email) {
     return null;
 }
 
+/* fonction d'inscription d'un nouvel utilisateur */
 async function signUp(newUserInfos) {
-    if (await isEmailExist(newUserInfos.email)) {
-        return null;
+    if (await isEmailExist(newUserInfos.email)) {  // si l'email existe déjà
+        return null;  // on quitte la fonction
     }
 
     let userInfos = null;
@@ -51,10 +55,11 @@ async function signUp(newUserInfos) {
     return userInfos;
 }
 
+/* fonction de connexion d'un utilisateur */
 async function signIn(email, passwd) {
     let userInfos = null;
     try {
-        userInfos = await User.findOne({ email, passwd });
+        userInfos = await User.findOne({ email, passwd });  // email et mot de passe nécessaires pour la connexion
     } catch (err) {
         console.error(err.message);
         return null;
@@ -68,6 +73,7 @@ async function signIn(email, passwd) {
     return userInfos;
 }
 
+/* fonction de mise à jour des infos d'un utilisateur */
 async function updateUserInfos(email, newUserInfos) {
     if (!(await isEmailExist(email)))
         return null;
@@ -77,6 +83,7 @@ async function updateUserInfos(email, newUserInfos) {
     return userInfosUpdated;
 }
 
+/* fonction de création d'un véhicule */
 async function createCar(carData) {
     let userCar = null;
 
@@ -90,6 +97,7 @@ async function createCar(carData) {
     return userCar;
 }
 
+/* fonction d'enregistrement d'un véhicule relié à un utilisateur */
 async function addCarToUser(email, carData) {
     if (!(carData instanceof Voiture)) {
         console.error("La voiture (2ème argument) n'est pas une instance de Voiture");
@@ -107,6 +115,7 @@ async function addCarToUser(email, carData) {
     return userInfos;
 }
 
+/* fonction de recherche d'un véhicule utilisateur */
 async function getUserCar(carId) {
     if (!mongoose.isValidObjectId(carId)) {
         console.error("Identifiant incorrecte");
@@ -123,6 +132,7 @@ async function getUserCar(carId) {
     }
 }
 
+/* fonction de mise à jour des kilomètres (km) d'un véhicule utilisateur */
 async function updateKmUserCar(email, newKm) {
     if (typeof (newKm) !== "number") {
         console.error("udpateKmUserCar(): le km doit être un entier");

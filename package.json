@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "nodemon server"
+    "start": "nodemon index"
   },
   "author": "Bozlak Fatih",
   "license": "ISC",
