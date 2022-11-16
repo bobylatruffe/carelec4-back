@@ -3,7 +3,7 @@ const { mongoose, User, Revision, Voiture } = require("./models.js");
 
 async function toConnectBdd() {
     try {
-        await mongoose.connect("mongodb+srv://bfssfb67:w5d85qa2@cluster0.7jbewlj.mongodb.net/carelec?retryWrites=true&w=majority");
+        await mongoose.connect("mongodb+srv://" + process.env.DB_USER_PASS + "@cluster0.7jbewlj.mongodb.net/carelec?retryWrites=true&w=majority");
         // console.log("Connexion à la bdd ok")
     } catch (err) {
         throw err;
@@ -112,7 +112,7 @@ async function getUserCar(carId) {
         console.error("Identifiant incorrecte");
         return null;
     }
-    
+
     let userCar = null;
     try {
         userCar = await Voiture.findById(carId);
