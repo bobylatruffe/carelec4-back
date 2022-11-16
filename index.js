@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const https = require("https");
+const https = require("https");  // import du module HTTPS
 const fs = require("fs");
 const path = require("path");
 const options = {
@@ -42,7 +42,7 @@ app.get("/*", (_, resp) => {
   return resp.status(404).json({ message: "rien à voir ici..." });
 })
 
-const httpsServer = https.createServer(options, app);
+const httpsServer = https.createServer(options, app);  // création du serveur HTTPS
 httpsServer.listen(process.env.PORT, () => {  // écoute du port
-  console.log(`https server listening on port ${process.env.PORT}`);
+  console.log(`https server listening on port ${process.env.PORT}`);  // message de confirmation de l'écoute du port
 });
