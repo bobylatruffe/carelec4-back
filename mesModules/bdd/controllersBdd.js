@@ -1,4 +1,4 @@
-const { mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 const { toConnectBdd } = require("../../config/db.js");
 const { User, Revision, Voiture } = require("./models.js");
 

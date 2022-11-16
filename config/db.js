@@ -1,4 +1,5 @@
-const { mongoose, disconnect } = require("mongoose");
+const mongoose = require("mongoose");
+
 
 /* fonction de connexion à la base de donnée (BDD) */
 async function toConnectBdd() {
@@ -14,7 +15,7 @@ async function toConnectBdd() {
 
 /* fonction de déconnexion de la BDD */
 async function toDisconnectBdd() {
-    await disconnect();
+    await mongoose.disconnect();
     // console.log("Déconnexion de la BDD ok");
 }
 
