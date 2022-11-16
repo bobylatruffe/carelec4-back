@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { isEmail } = require('validator');  // valide et nettoie les string d'adresse email
+const bcrypt = require('bcrypt');  // bibliothèque pour aider à hacher les mots de passe
 
 /* schéma de données d'une voiture dans la BDD (ID automatiquement généré par Mongoose) */
 const voitureSchema = new mongoose.Schema({
@@ -136,6 +137,25 @@ const userSchema = mongoose.Schema(
         timestamps: true
     }
 )
+
+/* fonction de cryptage du password (s'active avant l'envoi des données dans la BDD */
+userSchema.pre("save", async function (next) {
+    const salt = await bcrypt.genSalt();
+    this.passwd = await bcrypt.hash(this.passwd, salt);  // stocke le mot de passe crypté
+    next();
+});
+
+userSchema.statics.login = async function (email, passwd) {
+    const user = await this.findOne({ email });
+    if (user) {
+        const auth = await bcrypt.compare(passwd, user.passwd);
+        if (auth) {
+            return user;
+        }
+        throw Error('incorrect password');
+    }
+    throw Error('incorrect email')
+};
 
 /* export des schémas en tant que modèle Mongoose afin de les rendre disponibles pour Express */
 const User = mongoose.model("User", userSchema);

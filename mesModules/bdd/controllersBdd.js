@@ -43,7 +43,7 @@ async function signUp(newUserInfos) {
 async function signIn(email, passwd) {
     let userInfos = null;
     try {
-        userInfos = await User.findOne({ email, passwd });  // email et mot de passe nécessaires pour la connexion
+        userInfos = await User.login(email, passwd);  // email et mot de passe nécessaires pour la connexion
     } catch (err) {
         console.error(err.message);
         return null;
