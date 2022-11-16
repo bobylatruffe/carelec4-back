@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+/* schéma de données d'une voiture dans la BDD (ID automatiquement généré par Mongoose) */
 const voitureSchema = new mongoose.Schema({
     marque: String,
     model: String,
@@ -8,6 +9,7 @@ const voitureSchema = new mongoose.Schema({
     km: Number,
 });
 
+/* schéma de données d'une révision dans la BDD */
 const revisionSchema = new mongoose.Schema({
     datePriseRdv: {
         type: Date,
@@ -39,7 +41,7 @@ const revisionSchema = new mongoose.Schema({
         }
     },
     entretien: {
-        type: Array, 
+        type: Array,
         default: []
     },
     dropUp: {
@@ -57,6 +59,7 @@ const revisionSchema = new mongoose.Schema({
     }
 });
 
+/* schéma de données d'un utilisateur dans la BDD */
 const userSchema = mongoose.Schema({
     createAt: {
         type: Date,
@@ -90,6 +93,7 @@ const userSchema = mongoose.Schema({
     }]
 })
 
+/* export des schémas en tant que modèle Mongoose afin de les rendre disponibles pour Express */
 const User = mongoose.model("User", userSchema);
 const Revision = mongoose.model("Revision", revisionSchema);
 const Voiture = mongoose.model("Voiture", voitureSchema);

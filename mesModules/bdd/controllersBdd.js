@@ -1,23 +1,7 @@
-const { disconnect } = require("mongoose");
-const { mongoose, User, Revision, Voiture } = require("./models.js");
+const { mongoose } = require("mongoose");
+const { toConnectBdd } = require("../../config/db.js");
+const { User, Revision, Voiture } = require("./models.js");
 
-/* fonction de connexion à la base de donnée (BDD) */
-async function toConnectBdd() {
-    try {
-        await mongoose.connect("mongodb+srv://" + process.env.DB_USER_PASS + "@cluster0.7jbewlj.mongodb.net/carelec?retryWrites=true&w=majority");
-        // console.log("Connexion à la BDD ok")
-    } catch (err) {
-        throw err;
-    }
-
-    return true;
-}
-
-/* fonction de déconnexion de la BDD */
-async function toDisconnectBdd() {
-    await mongoose.disconnect();
-    // console.log("Déconnexion de la BDD ok");
-}
 
 /* fonction de vérification de l'existance d'une adresse email dans la BDD */
 async function isEmailExist(email) {
@@ -286,8 +270,6 @@ if (process.argv[2] === "test")
     test();
 
 module.exports = {
-    toConnectBdd,
-    toDisconnectBdd,
     signUp,
     signIn,
     updateUserInfos,

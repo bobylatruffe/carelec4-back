@@ -1,10 +1,23 @@
-const express = require("express");
-const router = express.Router();
-
-const { toConnectBdd, signUp, signIn, updateUserInfos, getUserCar, updateKmUserCar, addCarToUser, createCar, createRevision, addRevisionToUser, updateRevisionStatus, updateRevisionEdl, addTacheInRevision, isEmailExist } = require("../../mesModules/bdd/controllersBdd");
+const router = require("express").Router();  // classe pour créer des gestionnaires de route modulaires et pouvant être montés
+const { toConnectBdd } = require("../../config/db");
+const { signUp,
+    signIn,
+    updateUserInfos,
+    getUserCar,
+    updateKmUserCar,
+    addCarToUser,
+    createCar,
+    createRevision,
+    addRevisionToUser,
+    updateRevisionStatus,
+    updateRevisionEdl,
+    addTacheInRevision,
+    isEmailExist
+} = require("../../mesModules/bdd/controllersBdd");
 const { Voiture, Revision } = require("../../mesModules/bdd/models");
 
-// toutes les api devront passer par cette route, qui permet de se connecter à la bdd.
+
+// toutes les api devront passer par cette route, qui permet de se connecter à la BDD.
 // est-ce efficace ? je ne sais pas encore, je verrai bien plus tard.
 router.post("/*", async (req, resp, next) => {
     try {
@@ -13,7 +26,7 @@ router.post("/*", async (req, resp, next) => {
     }
     catch (err) {
         console.log(err.message)
-        resp.status(500).json({ message: "Problème de connection avec la bdd" });
+        resp.status(500).json({ message: "Problème de connexion avec la BDD" });
     }
 });
 

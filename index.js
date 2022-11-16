@@ -3,11 +3,15 @@ const app = express();
 const https = require("https");  // import du module HTTPS
 const fs = require("fs");
 const path = require("path");
+require('dotenv').config({ path: './config/.env' });  // module sans dépendance qui charge les variables d'environnement d'un .env fichier dans process.env
+const carnetsEntretiensRoute = require("./routes/carnetsEntretiens/carnetsEntretiens");
+const toStandardiserRoute = require("./routes/toStandardiser/toStandardiser");
+const bdd = require("./routes/bdd/bdd");
 const options = {
   key: fs.readFileSync(path.join(__dirname, './cert/key.pem')),
   cert: fs.readFileSync(path.join(__dirname, './cert/cert.pem'))
 }
-require('dotenv').config({ path: './config/.env' });  // module sans dépendance qui charge les variables d'environnement d'un .env fichier dans process.env
+
 
 app.use((req, resp, next) => {
   console.log("bonjour");
@@ -29,13 +33,9 @@ app.get('/', (req, resp) => {
   resp.json("ok");
 })
 
-const carnetsEntretiensRoute = require("./routes/carnetsEntretiens/carnetsEntretiens");
+/* routes */
 app.use("/api/carnetsEntretiens", carnetsEntretiensRoute);
-
-const toStandardiserRoute = require("./routes/toStandardiser/toStandardiser");
 app.use("/api/toStandardiser", toStandardiserRoute);
-
-const bdd = require("./routes/bdd/bdd");
 app.use("/api/bdd", bdd);
 
 app.get("/*", (_, resp) => {
@@ -43,6 +43,6 @@ app.get("/*", (_, resp) => {
 })
 
 const httpsServer = https.createServer(options, app);  // création du serveur HTTPS
-httpsServer.listen(process.env.PORT, () => {  // écoute du port
+httpsServer.listen(process.env.PORT, () => {  // écoute du port (toujours à la fin du fichier)
   console.log(`https server listening on port ${process.env.PORT}`);  // message de confirmation de l'écoute du port
 });

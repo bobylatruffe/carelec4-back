@@ -1,5 +1,6 @@
 const fetch = require("node-fetch");
-const { toConnectBdd, toDisconnectBdd, signIn } = require("../../mesModules/bdd/controllersBdd");
+const { toConnectBdd, toDisconnectBdd } = require("../../config/db");
+const { signIn } = require("../../mesModules/bdd/controllersBdd");
 const { User, Revision, Voiture } = require("../../mesModules/bdd/models");
 
 const randNb = (max) => Math.floor(Math.random() * max);

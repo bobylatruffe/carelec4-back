@@ -2,8 +2,7 @@ const toStandardiser = require("../../mesModules/standardisation/standardisation
 const { getLibelle } = require("../../mesModules/getLibelle/getLibelle");
 const { getCarnetsEntretiensSdd } = require("../../mesModules/carnetsEntretiens/initCarnetsEntretiensSdd")
 
-const express = require("express");
-const router = express.Router();
+const router = require("express").Router();  // classe pour créer des gestionnaires de route modulaires et pouvant être montés
 
 router.get("/:numImmat", (req, resp) => {
   getLibelle(req.params.numImmat)
@@ -18,7 +17,7 @@ router.get("/:numImmat", (req, resp) => {
 });
 
 router.get("/*", (_, resp) => {
-  return resp.status(500).json({ message: "Merci de fournir une plaque d'immat" });
+  return resp.status(500).json({ message: "Merci de fournir une plaque d'immatriculation" });
 });
 
 module.exports = router;

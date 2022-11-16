@@ -1,5 +1,4 @@
-const express = require("express");
-const router = express.Router();
+const router = require("express").Router();  // classe pour créer des gestionnaires de route modulaires et pouvant être montés
 
 const { getCarnetsEntretiensSdd } = require("../../mesModules/carnetsEntretiens/initCarnetsEntretiensSdd")
 const carnetsEntretiensSdd = getCarnetsEntretiensSdd();
@@ -23,7 +22,7 @@ router.get("/:marque", (req, resp) => {
   if (allModelsFromMarque.length != 0)
     return resp.json(allModelsFromMarque)
 
-  return resp.status(500).json({message: "Aucun modèle pour cette marque"});
+  return resp.status(500).json({ message: "Aucun modèle pour cette marque" });
 });
 
 router.get("/:marque/:modele/", (req, resp) => {
@@ -34,7 +33,7 @@ router.get("/:marque/:modele/", (req, resp) => {
   if (allMotorsFromMarqueModelTab.length != 0)
     return resp.json(allMotorsFromMarqueModelTab)
 
-  return resp.status(500).json({message : "Aucune motorisation trouvée pour la marque et le modèle"});
+  return resp.status(500).json({ message: "Aucune motorisation trouvée pour la marque et le modèle" });
 });
 
 router.get("/:marque/:modele/:motor", (req, resp) => {
@@ -45,7 +44,7 @@ router.get("/:marque/:modele/:motor", (req, resp) => {
   }
 
   if (req.query.what && (req.query.what !== "km" && req.query.what !== "time"))
-    return resp.status(500).json({message : "Le what n'est pas correcte : km || time"});
+    return resp.status(500).json({ message: "Le what n'est pas correcte : km || time" });
 
   let revisions = getRevisions(carnetsEntretiensSdd, forReqSdd)
   if (revisions) {
@@ -56,7 +55,7 @@ router.get("/:marque/:modele/:motor", (req, resp) => {
     return resp.json(revisions);
   }
 
-  return resp.status(500).json({message : "Aucune révision trouvée pour cette motorisation"});
+  return resp.status(500).json({ message: "Aucune révision trouvée pour cette motorisation" });
 });
 
 

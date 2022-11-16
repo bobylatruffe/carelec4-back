@@ -1,6 +1,5 @@
+const { toConnectBdd, toDisconnectBdd } = require("../../config/db.js");
 const {
-    toConnectBdd,
-    toDisconnectBdd,
     signIn,
     signUp,
     updateUserInfos,
