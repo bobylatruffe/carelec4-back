@@ -7,6 +7,7 @@ const options = {
   key: fs.readFileSync(path.join(__dirname, './cert/key.pem')),
   cert: fs.readFileSync(path.join(__dirname, './cert/cert.pem'))
 }
+require('dotenv').config({ path: './config/.env' });  // module sans dépendance qui charge les variables d'environnement d'un .env fichier dans process.env
 
 app.use((req, resp, next) => {
   console.log("bonjour");
@@ -42,6 +43,6 @@ app.get("/*", (_, resp) => {
 })
 
 const httpsServer = https.createServer(options, app);
-httpsServer.listen(process.env.PORT, () => {
+httpsServer.listen(process.env.PORT, () => {  // écoute du port
   console.log(`https server listening on port ${process.env.PORT}`);
 });
