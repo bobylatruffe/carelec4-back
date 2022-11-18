@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { toConnectBdd, signUp, signIn, updateUserInfos, getUserCar, updateKmUserCar, addCarToUser, createCar, createRevision, addRevisionToUser, updateRevisionStatus, updateRevisionEdl, addTacheInRevision, isEmailExist } = require("../../mesModules/bdd/controllersBdd");
+const { toConnectBdd, signUp, signIn, updateUserInfos, getUserCar, updateKmUserCar, addCarToUser, createCar, createRevision, addRevisionToUser, updateRevisionStatus, updateRevisionEdl, addTacheInRevision, isEmailExist, getUserInfosWithRevisionId } = require("../../mesModules/bdd/controllersBdd");
 const { Voiture, Revision } = require("../../mesModules/bdd/models");
 
 // toutes les api devront passer par cette route, qui permet de se connecter à la bdd.

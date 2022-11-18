@@ -112,7 +112,7 @@ async function getUserCar(carId) {
         console.error("Identifiant incorrecte");
         return null;
     }
-    
+
     let userCar = null;
     try {
         userCar = await Voiture.findById(carId);
@@ -266,14 +266,16 @@ async function addImgForTache(revisionId, tacheIntitule, newImg) {
     return currentRevision;
 }
 
-async function getAllRevisions() {
-    let allRevisions = [];
+async function getAllUsers() {
+    let allUser = [];
     try {
-        allRevisions = await Revision.find({});
-        return allRevisions;
-    } catch(err) {
+        allUser = await User.find({});
+        if (!allUser)
+            return null;
+        return allUser;
+    } catch (err) {
         console.error(err.message);
-        console.error("getAllRevisions() : Problème lors de la récupération des révisions programmée");
+        console.error("getAllUsers() : Problème interne lors de la récupération de tous les users");
         return null;
     }
 }
@@ -304,5 +306,5 @@ module.exports = {
     addTacheInRevision,
     addImgForTache,
     isEmailExist,
-    getAllRevisions
+    getAllUsers,
 }
