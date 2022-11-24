@@ -1,20 +1,14 @@
 const express = require('express');
 const app = express();
-const https = require("https");
-const fs = require("fs");
-const path = require("path");
-const options = {
-  key: fs.readFileSync(path.join(__dirname, './cert/myserver.key')),
-  cert: fs.readFileSync(path.join(__dirname, './cert/bozlak_ddns_net.pem-chain'))
-  // ca: fs.readFileSync(path.join(__dirname, "./cert/bozlak_ddns_net.pem-chain"))
-}
+const httpsServer = require("./mesModules/httpsServer/httpsServer")(app);
+const io = require("./mesModules/admin/socketIo");
 
 app.use((req, resp, next) => {
   resp.setHeader('Access-Control-Allow-Origin', '*');
   resp.setHeader("Access-Control-Allow-Headers", "*");
-  // resp.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  // resp.setHeader("Access-Control-Max-Age", "3600");
-  // resp.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER,Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");
+  resp.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  resp.setHeader("Access-Control-Max-Age", "3600");
+  resp.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER,Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");
   next();
 });
 
@@ -49,7 +43,6 @@ app.get("/*", (_, resp) => {
   return resp.status(404).json({ message: "rien à voir ici..." });
 })
 
-const httpsServer = https.createServer(options, app);
 httpsServer.listen(PORT, () => {
   console.log("https server on listen " + PORT);
 });

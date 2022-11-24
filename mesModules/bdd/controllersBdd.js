@@ -1,4 +1,5 @@
 const { disconnect } = require("mongoose");
+const getLatLongFromAdresseAndCp = require("../admin/geocodage.js");
 const { mongoose, User, Revision, Voiture } = require("./models.js");
 
 async function toConnectBdd() {
@@ -280,6 +281,25 @@ async function getAllUsers() {
     }
 }
 
+async function getLatLongUserFromRevisionId(revisionId) {
+    await toConnectBdd();
+
+    if (!mongoose.isValidObjectId(revisionId))
+        return { message: "Erreur dans revisionId fournit" };
+
+
+    const userInfos = await User.findOne({ currentRevision: revisionId });
+    if (!userInfos)
+        return null
+
+    const latLong = await getLatLongFromAdresseAndCp(userInfos.adresse, userInfos.cp);
+    console.log(latLong);
+
+    toDisconnectBdd();
+
+    return latLong;
+}
+
 async function test() {
     if (await toConnectBdd()) {
         console.error(await signIn("bozlak.fatih@gmail.com2019926522", "w5d85qa2"));
@@ -307,4 +327,5 @@ module.exports = {
     addImgForTache,
     isEmailExist,
     getAllUsers,
+    getLatLongUserFromRevisionId
 }
