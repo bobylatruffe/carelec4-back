@@ -11,17 +11,27 @@ const io = new Server(httpsServer, {
 io.on("connection", (socket) => {
     console.log("a user connected");
 
-    socket.on("revisionId", async ({id, admin, type}) => {
+    socket.on("revisionId", async ({ id, admin, type }) => {
         console.log(id);
         const userLatLong = await getLatLongUserFromRevisionId(id);
         if (admin) {
-            await toConnectBdd();
-            await updateRevisionStatus(id, type, "enCours");
+            try {
+                await toConnectBdd();
+                await updateRevisionStatus(id, type, "enCours");
+            } catch (err) {
+                console.log(err.message);
+                return null;
+            }
         }
 
         socket.on(id + "arrived", async () => {
-            await toConnectBdd();
-            await updateRevisionStatus(id, type, "end");
+            try {
+                await toConnectBdd();
+                await updateRevisionStatus(id, type, "end");
+            } catch(err) {
+                console.log(err.message);
+                return null;
+            }
         })
 
         socket.emit(id + "userPos", userLatLong);
