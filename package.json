@@ -4,6 +4,8 @@
   "description": "Serveur pour fournir des API pour le Front",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon & cd './front' && npm start ",
+    "build": "cd './front' && npm run build",
     "test": "jest"
   },
   "author": "Bozlak Fatih",
