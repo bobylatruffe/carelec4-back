@@ -1,0 +1,38 @@
+.ResumerRevision {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0px 0px 20px #afafaf;
+    border-radius: 4px;
+    position: relative;
+
+    &:hover {
+        box-shadow: 0px 0px 10px #afafaf;
+        cursor: pointer;
+    }
+
+    &:active {
+        background-color: #d80000;
+        color: white;
+        box-shadow: 0px 0px;
+    }
+
+    .currentTache {
+        background-color: #d80000;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        text-align: center;
+        width: 30%;
+
+        color: white;
+        font-weight: bold;
+
+    }
+
+    .barrer {
+        text-decoration: line-through;
+    }
+}

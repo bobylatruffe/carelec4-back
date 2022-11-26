@@ -1,0 +1,132 @@
+body {
+    min-width: 1000px;
+    font-family: "Roboto", sans-serif;
+
+    a {
+        color: black;
+    }
+
+    .red {
+        color: #D80000;
+    }
+
+    p {
+        margin-bottom: 5px;
+    }
+
+    hr {
+        margin-bottom: 20px;
+    }
+
+    h1 {
+        font-size: 26px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    h3 {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    label {
+        font-weight: bold;        
+    }
+
+    strong {
+        font-weight: bold;
+    }
+
+    input, select {
+        height: 40px;
+        padding-left: 10px;
+        padding-right: 10px;
+
+        margin-bottom: 5px;
+        margin-top: 5px;
+        // width: 30%;
+
+        background-color: black;
+        color: white;
+        font-size: 14px;
+        font-weight: bold;
+
+        outline: none;
+        border: none;
+        border-radius: 4px;
+
+        &:focus {
+            outline: solid 2px #d80000;
+        }
+    }
+
+    // @media screen and (max-width: 1100px) {
+    //     input {
+    //         width: 100%;
+    //     }
+
+    //     .inputLeft {
+    //         margin-right: 0px;
+    //     }
+    // }
+
+    .inputLeft {
+        margin-right: 10px;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        appearance: none;
+        -moz-appearance: textfield;
+    }
+
+    // source https://css-tricks.com/snippets/css/change-autocomplete-styles-webkit-browsers/
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover,
+    textarea:-webkit-autofill:focus,
+    select:-webkit-autofill,
+    select:-webkit-autofill:hover,
+    select:-webkit-autofill:focus {
+        border: none;
+        -webkit-text-fill-color: white;
+        // -webkit-box-shadow: 0 0 0px 1000px #000 inset;
+        transition: background-color 5000s ease-in-out 0s;
+    }
+
+    button {
+        border: none;
+        background-color: white;
+        box-shadow: 0px 0px 20px #afafaf;
+        height: 40px;
+        width: 100%;
+        font-family: "Roboto";
+        font-weight: bold;
+        font-size: 16px;
+        border-radius: 4px;
+
+        &:hover {
+            box-shadow: 0px 0px 10px #afafaf;
+            cursor: pointer;
+        }
+
+        &:active {
+            background-color: #d80000;
+            color: white;
+            box-shadow: 0px 0px;
+        }
+    }
+}

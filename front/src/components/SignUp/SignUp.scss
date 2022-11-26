@@ -1,0 +1,55 @@
+#SignUp {
+    height: 100vh;
+    // background-color: red;
+    display: flex;
+    align-items: center;
+
+    .container {
+        // background-color: blue;
+        width: 50%;
+
+        .contain {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-left: 10%;
+            padding-right: 10%;
+
+            h1 {
+                align-self: flex-start;
+            }
+
+            h2 {
+                align-self: flex-start;
+                margin-bottom: 5%;
+            }
+
+            #dejaUnCompte {
+                margin-top: 10px;
+                text-align: right;
+
+                font-size: 14px;
+            }
+
+            form {
+                // border: solid 1px red;
+                display: inline-block;
+                // background-color: yellow;
+
+                button {
+                    margin-top: 20px;
+                }
+            }
+        }
+    }
+
+    .deco {
+        background-color: black;
+        background-image: url("./signUpDeco.png");
+        background-position-y: center;
+        background-size: 1000px;
+        background-repeat: no-repeat;
+        height: 100%;
+        width: 50%;
+    }
+}

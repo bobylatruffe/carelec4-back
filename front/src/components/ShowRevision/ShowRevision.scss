@@ -1,0 +1,60 @@
+#ShowRevision {
+    .taches {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        // background-color: red;
+
+        .tache {
+            padding: 10px;
+            background-color: #dfdfdf;
+            position: relative;
+            margin-bottom: 20px;
+
+            p {
+                margin: 0px;
+            }
+
+            .clickable {
+                display: inline-block;
+                position: absolute;
+                top: -7.5px;
+                right: -7.5px;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    #ChoisirDate {
+        #dates, #heures {
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+
+            button {
+                width: 150px;
+                margin-right: 20px;
+                margin-top: 20px;
+            }
+
+            .active {
+                background-color: #d80000;
+                color: white;
+                box-shadow: 0px 0px;
+            }
+        }
+
+        button {
+            width: 100%;
+        }
+    }
+
+    button,
+    select {
+        margin: 0px;
+        width: 350px;
+    }
+}

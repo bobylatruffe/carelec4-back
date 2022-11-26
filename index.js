@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const httpsServer = require("./mesModules/httpsServer/httpsServer")(app);
+const path = require("path");
 const io = require("./mesModules/admin/socketIo");
 
 app.use((req, resp, next) => {
@@ -23,9 +24,7 @@ const PORT = 5000;
 const { initCarnetsEntretiensSdd } = require("./mesModules/carnetsEntretiens/initCarnetsEntretiensSdd");
 initCarnetsEntretiensSdd();
 
-app.get('/', (req, resp) => {
-  resp.json("ok");
-})
+app.use(express.static("public"))
 
 const carnetsEntretiensRoute = require("./routes/carnetsEntretiens/carnetsEntretiens");
 app.use("/api/carnetsEntretiens", carnetsEntretiensRoute);
@@ -38,6 +37,10 @@ app.use("/api/bdd", bdd);
 
 const admin = require("./routes/admin/admin");
 app.use("/api/admin", admin);
+
+app.use((req, resp, next) => {
+  resp.sendFile(path.join(__dirname, "public", "index.html"));
+})
 
 app.get("/*", (_, resp) => {
   return resp.status(404).json({ message: "rien à voir ici..." });

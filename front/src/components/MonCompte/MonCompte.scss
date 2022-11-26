@@ -1,0 +1,51 @@
+#MonCompte {
+    // background-color: green;
+    // padding: 40px;
+    margin-top: 40px;
+    margin-left: 40px;
+
+    #container {
+        // background-color: yellow;
+        margin-top: 40px;
+        display: flex;
+        // justify-content: center;
+
+        #sousMenu {
+            // background-color: red;
+            display: flex;
+            flex-direction: column;
+
+            // width: 250px;
+
+            a {
+                text-decoration: none;
+                // background-color: yellow;
+                margin-bottom: 20px;
+                margin-right: 50px;
+
+                svg {
+                    margin-right: 10px;
+                }
+            }
+        }
+
+        #content {
+            width: 70%;
+            // background-color: blue;
+
+            form {
+                // background-color: red;
+
+                button {
+                    margin-top: 20px;
+                    width: 205px;
+                }
+
+                label {
+                    display: block;
+                    margin-top: 10px;
+                }
+            }
+        }
+    }
+}
