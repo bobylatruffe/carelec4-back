@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "nodemon & cd './front' && npm start ",
     "build": "cd './front' && npm run build",
+    "cleanPublic": "rm -rf public/*",
     "test": "jest"
   },
   "author": "Bozlak Fatih",
