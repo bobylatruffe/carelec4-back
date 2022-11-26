@@ -1,4 +1,5 @@
-const PATH = "https://bozlak.ddns.net/api/carnetsEntretiens";
+// const PATH = "https://bozlak.ddns.net/api/carnetsEntretiens";
+const PATH = process.env.REACT_APP_BASE_URL + "/api/carnetsEntretiens";
 
 async function queryCarnetsEntretiens(route) {
     const response = await fetch(`${PATH}/${route}`);

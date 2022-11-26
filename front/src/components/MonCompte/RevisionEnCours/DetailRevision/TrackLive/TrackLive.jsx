@@ -37,7 +37,7 @@ function TrackLive({ id, type, setParentCurrentRender, admin }) {
     }
 
     useEffect(() => {
-        socket = io("https://bozlak.ddns.net/");
+        socket = io(process.env.REACT_APP_BASE_URL);
         let watcher = null;
 
         socket.on("connect", () => {

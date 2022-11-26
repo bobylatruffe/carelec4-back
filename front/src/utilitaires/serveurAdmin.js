@@ -1,4 +1,6 @@
-const PATH = "https://bozlak.ddns.net/api/admin";
+// const PATH = "https://bozlak.ddns.net/api/admin";
+const PATH = process.env.REACT_APP_BASE_URL + "/api/admin";
+
 
 async function queryAdmin(route, data, type) {
     let response = null;
