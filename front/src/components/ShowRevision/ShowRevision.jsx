@@ -199,7 +199,7 @@ function ShowRevision({ voitureId, email, setUserInfos, setAddRevision, currentC
         <div id="ShowRevision">
             {userCar && !choisirDate &&
                 <>
-                    <p><strong><span className="red">Personnalisez</span> l'entretien de votre véhicule</strong></p>
+                    <p className="likeH1"><strong><span className="red">Personnalisez</span> l'entretien de votre véhicule</strong></p>
                     <p>Voici de ce qui est recommandé pour votre {userCar.marque} {userCar.motor} à {userCar.km} km</p>
                     <br />
 
@@ -233,21 +233,21 @@ function ShowRevision({ voitureId, email, setUserInfos, setAddRevision, currentC
             }
             {userCar && choisirDate &&
                 <div id="ChoisirDate">
-                    <p><strong><span className="red">Resumer</span> de votre entretien</strong></p>
+                    <p className="likeH1"><strong><span className="red">Resumer</span> de votre entretien</strong></p>
                     <br />
-                    <p>Votre véhicule :</p>
+                    <p><strong>Votre véhicule :</strong></p>
                     <p>{userCar.immat}</p>
                     <p>{userCar.marque} {userCar.motor}</p>
                     <p>{userCar.km} km</p>
                     <br />
 
-                    <p>Tâches à accomplir :</p>
+                    <p><strong>Tâches à accomplir :</strong></p>
                     {revisionPropose.map(tache => <p key={tache}>{tache}</p>)}
                     <br />
                     <br />
                     <br />
 
-                    <p><strong>Choisissez la <span className="red">date</span> que vous souhaitez pour qu'on réalise l'entretien de votre véhicule</strong></p>
+                    <p className="likeH1"><strong>Choisissez la <span className="red">date</span> que vous souhaitez pour qu'on réalise l'entretien de votre véhicule</strong></p>
 
                     {/* faut que les données des différents bouton soit généré par le serveur  */}
                     <div id="dates">
@@ -266,7 +266,7 @@ function ShowRevision({ voitureId, email, setUserInfos, setAddRevision, currentC
 
                     {dateChoisie &&
                         <>
-                            <p><strong>Indiquez-nous le <span className="red">créneau horaire</span> à lequel nous puissions récupérer votre véhicule</strong></p>
+                            <p className="likeH1"><strong>Indiquez-nous le <span className="red">créneau horaire</span> à lequel nous puissions récupérer votre véhicule</strong></p>
                             <div id="heures">
                                 <button value="08:00" onClick={(e) => handlerChoisirDate(e, "heures")}>08h00 et 09h00</button>
                                 <button value="09:00" onClick={(e) => handlerChoisirDate(e, "heures")}>09h00 et 10h00</button>
