@@ -3,6 +3,8 @@ import { Route, Routes } from 'react-router-dom';
 import './App.scss';
 import Accueil from './components/Accueil/Accueil';
 import { Admin } from './components/Admin/Admin';
+import Aide from './components/Aide/Aide';
+import Chatbot from './components/Chatbot/Chatbot';
 import Menu from './components/Menu/Menu';
 import MonCompte from './components/MonCompte/MonCompte';
 import SignIn from './components/SignIn/SignIn';
@@ -15,6 +17,12 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Accueil />} />
+        <Route path="/Aides" element={
+          <>
+            <Chatbot />
+            <Aide />
+          </>}
+        />
         <Route path="SignUp" element={<SignUp />} />
         <Route path="SignIn" element={<SignIn />} />
         <Route path="MonCompte/*" element={<MonCompte />} />
