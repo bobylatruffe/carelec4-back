@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 
 import './App.scss';
-
+import Accueil from './components/Accueil/Accueil';
 import { Admin } from './components/Admin/Admin';
 import Menu from './components/Menu/Menu';
 import MonCompte from './components/MonCompte/MonCompte';
@@ -12,8 +12,9 @@ function App() {
   return (
     <>
       <Menu />
-      
+
       <Routes>
+        <Route path="/" element={<Accueil />} />
         <Route path="SignUp" element={<SignUp />} />
         <Route path="SignIn" element={<SignIn />} />
         <Route path="MonCompte/*" element={<MonCompte />} />

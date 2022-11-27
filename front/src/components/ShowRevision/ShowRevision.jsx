@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { queryBdd } from "../../utilitaires/serveurBdd";
 import { queryCarnetsEntretiens } from "../../utilitaires/serveurCarnetsEntretiens";
 import { setSession } from "../../utilitaires/session";
@@ -58,8 +60,13 @@ function testerPresenceStrDansTab(str, tab) {
 // ces données devrait être récupérer du serveur !
 const allTaches = ["Révision avec vidange", "Remplacement Kit de Courroie de Distribution", "Remplacement Filtre à air", "Purge du Liquide de Frein", "Remplacement Filtre d’Habitacle", "Remplacement Courroie d\u2019Accessoires", "Remplacement Filtre à Carburant", "Vidange de Boîte de Vitesses Manuelle", "Remplacement Bougies d’Allumage"];
 
-function ShowRevision({ voitureId, email, setUserInfos, setAddRevision }) {
-    const [userCar, setUserCar] = useState(null);
+function ShowRevision({ voitureId, email, setUserInfos, setAddRevision, currentCar }) {
+    const [userCar, setUserCar] = useState(() => {
+        if (currentCar)
+            return currentCar
+        else
+            return null
+    });
     const [revisions, setRevisions] = useState(null);
     const [revisionPropose, setRevisionPropose] = useState([]);
     const [tachesDispo, setTachesDispo] = useState([]);
@@ -67,6 +74,8 @@ function ShowRevision({ voitureId, email, setUserInfos, setAddRevision }) {
     const [choisirDate, setChoisirDate] = useState(null);
     const [dateChoisie, setDateChoisie] = useState(null);
     const [creneauChoisie, setCreaneauChoisie] = useState(null);
+    
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (voitureId) {
@@ -136,8 +145,21 @@ function ShowRevision({ voitureId, email, setUserInfos, setAddRevision }) {
     }
 
     const handlerValiderRdv = async (e) => {
+        const entretiens = [];
+        revisionPropose.forEach(async tache => {
+            entretiens.push({ status: "noStart", tache, })
+        });
+
+        if(!email) {
+            setSession("currentCar", currentCar);
+            setSession("currentEntretien", entretiens);
+            setSession("dateCreneauChoisie", `${dateChoisie}T${creneauChoisie}`);
+
+            navigate("/MonCompte");
+            return;
+        }
+
         console.log(new Date(`${dateChoisie}T${creneauChoisie}`));
-        console.log(email);
 
         let revisionId = null;
         try {
@@ -150,11 +172,6 @@ function ShowRevision({ voitureId, email, setUserInfos, setAddRevision }) {
         } catch (err) {
             console.log(err.message);
         }
-
-        const entretiens = [];
-        revisionPropose.forEach(async tache => {
-            entretiens.push({ status: "noStart", tache, })
-        });
 
         try {
             await queryBdd("addTacheInRevision", {

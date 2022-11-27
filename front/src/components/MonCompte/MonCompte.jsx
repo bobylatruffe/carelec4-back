@@ -7,6 +7,68 @@ import "./MonCompte.scss";
 import MonVehicule from "./MonVehicule/MonVehicule";
 import RevisionEnCours from "./RevisionEnCours/RevisionEnCours";
 
+// ATTENTION !!! les anciennes données càd la voiture et la révision courante seront écrasé !!! il faut vérifier que l'user n'a pas de voiture et/ou de révision courante !
+async function checkPendingCarAndEntretien(email, setUserInfos) {
+    if (!email) {
+        return;
+    }
+
+    const pendingCar = getSession("currentCar");
+    const pendingDateCreneau = getSession("dateCreneauChoisie");
+    const pendingEntretien = getSession("currentEntretien");
+
+    if (!pendingCar || !pendingEntretien || !pendingDateCreneau)
+        return
+
+    let userInfosUpdated = null;
+    try {
+        userInfosUpdated = await queryBdd("addCarToUser", {
+            email,
+            carData: pendingCar
+        });
+
+        setSession("userInfos", userInfosUpdated);
+        setUserInfos(userInfosUpdated);
+
+    } catch (err) {
+        window.alert(err.message);
+    }
+
+    let revisionId = null;
+    try {
+        revisionId = await queryBdd("addRevisionToUser", {
+            email,
+            newRevision: {
+                dateProgrammer: new Date(pendingDateCreneau)
+            }
+        });
+    } catch (err) {
+        console.log(err.message);
+    }
+
+    try {
+        await queryBdd("addTacheInRevision", {
+            revisionId,
+            newTache: pendingEntretien
+        });
+    } catch (err) {
+        window.alert(err.message);
+        return null;
+    }
+
+    try {
+        userInfosUpdated = await queryBdd("getUserInfos", { email });
+        setUserInfos(userInfosUpdated);
+        setSession("userInfos", userInfosUpdated);
+        removeSession("currentCar");
+        removeSession("currentEntretien");
+        removeSession("pendingDateCreneau");
+    } catch (err) {
+        console.log(err.message);
+        return null;
+    }
+}
+
 function MonCompte() {
     const [userInfos, setUserInfos] = useState(null);
     const [userInfosUpdated, setUserInfosUpdated] = useState({});
@@ -21,6 +83,8 @@ function MonCompte() {
             setUserInfos(userInfosInSession);
         }
     );
+
+    checkPendingCarAndEntretien(userInfos?.email, setUserInfos);
 
     const handlerUpdateUserInfos = (e) => {
         setUserInfosUpdated({
@@ -142,7 +206,7 @@ function MonCompte() {
 
                                     <Route path="MonVehicule" element={<MonVehicule voitureId={userInfos.voiture} email={userInfos.email} setUserInfos={setUserInfos} />} />
 
-                                    <Route path="RevisionEnCours" element={<RevisionEnCours revisionId={userInfos.currentRevision} voitureId={userInfos.voiture} email={userInfos.email} setUserInfos={setUserInfos}/>} />
+                                    <Route path="RevisionEnCours" element={<RevisionEnCours revisionId={userInfos.currentRevision} voitureId={userInfos.voiture} email={userInfos.email} setUserInfos={setUserInfos} />} />
                                 </Routes>
                             </div>
                         </div>

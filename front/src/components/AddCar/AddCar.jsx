@@ -104,25 +104,36 @@ function AddCar({ email, setAddCar, setUserInfos }) {
     }
 
     const handlerAddCar = async (e) => {
-        let userInfosUpdated = null;
-        try {
-            userInfosUpdated = await queryBdd("addCarToUser", {
-                email,
-                carData: {
-                    marque: selectedMarque,
-                    model: selectedModel,
-                    motor: selectedMotor,
-                    km: parseInt(km),
-                    immat,
-                }
-            });
+        // nous sommes déjà connecter et l'user avait crée un compte vide
+        if (email) {
+            let userInfosUpdated = null;
+            try {
+                userInfosUpdated = await queryBdd("addCarToUser", {
+                    email,
+                    carData: {
+                        marque: selectedMarque,
+                        model: selectedModel,
+                        motor: selectedMotor,
+                        km: parseInt(km),
+                        immat,
+                    }
+                });
 
-            setSession("userInfos", userInfosUpdated);
-            setUserInfos(userInfosUpdated);
-            setAddCar(null);
-        } catch (err) {
-            window.alert(err.message);
+                setSession("userInfos", userInfosUpdated);
+                setUserInfos(userInfosUpdated);
+                setAddCar(null);
+            } catch (err) {
+                window.alert(err.message);
+            }
         }
+
+        setAddCar({
+            marque: selectedMarque,
+            model: selectedModel,
+            motor: selectedMotor,
+            km: parseInt(km),
+            immat,
+        });
     }
 
     return (

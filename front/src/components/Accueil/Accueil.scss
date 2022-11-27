@@ -1,0 +1,32 @@
+#Accueil {
+    // background-color: gray;
+    height: 100vh;
+    display: flex;
+
+    #container {
+        // background-color: blue;
+        height: 100%;
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        #content {
+            padding: 100px;
+
+            h2 {
+                margin-bottom: 40px;
+            }
+        }
+    }
+
+    #deco {
+        background-color: black;
+        background-image: url("./decoAccueil.png");
+        background-size: 1000px auto;
+        background-position: center center;
+        background-repeat: no-repeat;
+        height: 100%;
+        width: 50%;
+    }
+}
