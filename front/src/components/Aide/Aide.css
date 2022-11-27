@@ -1,0 +1,28 @@
+#aide {
+    position: relative;
+    width: 1366px;
+    margin: auto;
+  
+    padding-top: 5%;
+    text-align: justify;
+  }
+  
+  #aide #arrowTextContainer {
+    display: inline-block;
+    position: relative;
+    left: 25%;
+    top: 0px;
+    transform: rotate(35deg);
+  }
+  
+  #aide #arrowTextContainer p {
+    margin-left:  200px;
+  }
+  
+  #aide #description {
+    width: 450px;
+    margin: auto;
+  
+    position: relative;
+    top: -170px
+  }

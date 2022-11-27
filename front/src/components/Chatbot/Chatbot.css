@@ -1,0 +1,11 @@
+#chatbot_page {
+    position: relative;
+    margin: auto;
+    padding-top: 5%;
+    text-align: center;
+    /* overflow: auto; */
+}
+
+#chatbot_page button {
+    width: 200px;
+}
