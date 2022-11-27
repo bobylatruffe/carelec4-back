@@ -1,12 +1,12 @@
-import { Routes, Route, NavLink } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import './App.scss';
 
-import SignUp from './components/SignUp/SignUp';
-import SignIn from './components/SignIn/SignIn';
-import MonCompte from './components/MonCompte/MonCompte';
 import { Admin } from './components/Admin/Admin';
 import Menu from './components/Menu/Menu';
+import MonCompte from './components/MonCompte/MonCompte';
+import SignIn from './components/SignIn/SignIn';
+import SignUp from './components/SignUp/SignUp';
 
 function App() {
   return (

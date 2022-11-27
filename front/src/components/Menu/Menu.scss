@@ -17,6 +17,13 @@
     .accountLogo {
         position: absolute;
         right: 20px;
+        border: none;
+    }
+
+    .activeNavLink {
+       font-weight: bold;
+       border-bottom: 4px solid #d80000;
+    //    color: #d80000;
     }
 
     .logo {
@@ -24,5 +31,6 @@
         font-weight: bold;
         position: absolute;
         left: 20px;
+        border: none;
     }
 }
