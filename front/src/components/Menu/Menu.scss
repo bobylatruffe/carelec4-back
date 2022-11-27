@@ -1,0 +1,36 @@
+#Menu {
+    background-color: black;
+    height: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    a {
+        color: white;
+        text-decoration: none;
+        // background-color: red;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .accountLogo {
+        position: absolute;
+        right: 20px;
+        border: none;
+    }
+
+    .activeNavLink {
+       font-weight: bold;
+       border-bottom: 4px solid #d80000;
+    //    color: #d80000;
+    }
+
+    .logo {
+        font-size: 34px;
+        font-weight: bold;
+        position: absolute;
+        left: 20px;
+        border: none;
+    }
+}
