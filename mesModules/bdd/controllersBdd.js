@@ -300,6 +300,18 @@ async function getLatLongUserFromRevisionId(revisionId) {
     return latLong;
 }
 
+async function getEdls(revisionId) {
+    await toConnectBdd();
+    if (!mongoose.isValidObjectId(revisionId))
+        return { message: "Erreur dans revisionId fournit" };
+
+    const edls = await Revision.findById(revisionId);
+    if (!edls)
+        return null;
+
+    return edls;
+}
+
 async function test() {
     if (await toConnectBdd()) {
         console.error(await signIn("bozlak.fatih@gmail.com2019926522", "w5d85qa2"));
@@ -327,5 +339,6 @@ module.exports = {
     addImgForTache,
     isEmailExist,
     getAllUsers,
-    getLatLongUserFromRevisionId
+    getLatLongUserFromRevisionId,
+    getEdls,
 }

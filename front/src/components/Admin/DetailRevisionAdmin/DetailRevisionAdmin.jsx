@@ -63,6 +63,33 @@ function howRenderDropUp(currentRevision) {
         />)
 }
 
+function howRenderEdl(currentRevision, type) {
+    let btn = null;
+    if (type === "edlPickUp") {
+        if (currentRevision.edlPickUp.status === "noStart")
+            btn = { titre: "Commencer l'edlPickUp", type: "edlPickUpAdmin" }
+
+        if (currentRevision.edlPickUp.status === "enCours")
+            btn = { titre: "Continuer l'edlPickUp", type: "edlPickUpAdmin" }
+    }
+
+    if (type === "edlDropUp") {
+        if (currentRevision.edlDropUp.status === "noStart")
+            btn = { titre: "Commencer l'edlDropUp", type: "edlDropUpAdmin" }
+
+        if (currentRevision.edlDropUp.status === "enCours")
+            btn = { titre: "Continuer l'edlDropUp", type: "edlDropUpAdmin" }
+    }
+
+    return <DetailRevision
+        id={currentRevision._id}
+        status={currentRevision[type].status}
+        titre="Etat des lieux enlevement"
+        // sousTitre={getEnlevementDate()}
+        btn={btn}
+    />
+}
+
 async function fetchAllUserDataFromEmail(email, setCurrentRevision, setUserInfos, setVoiture) {
     const allUserDataFromEmail = await fetchAllUsersWithCurrentRevision(null, email);
     setUserInfos({
@@ -85,6 +112,7 @@ function DetailRevisionAdmin() {
 
     const [currentRevision, setCurrentRevision] = useState(null);
     const [userInfos, setUserInfos] = useState(null);
+    //eslint-disable-next-line
     const [voiture, setVoiture] = useState(null);
 
     if (!userInfos)
@@ -111,6 +139,16 @@ function DetailRevisionAdmin() {
                         statusChoisie: "dropUp",
                         newValue: "noStart"
                     });
+                    await queryBdd("/updateRevisionStatus", {
+                        revisionId: currentRevision._id,
+                        statusChoisie: "edlPickUp",
+                        newValue: "noStart"
+                    });
+                    await queryBdd("/updateRevisionStatus", {
+                        revisionId: currentRevision._id,
+                        statusChoisie: "edlDropUp",
+                        newValue: "noStart"
+                    });
 
                     window.location.reload();
                 }}
@@ -122,12 +160,7 @@ function DetailRevisionAdmin() {
 
             {howRenderPickUp(currentRevision)}
 
-            <DetailRevision
-                status={currentRevision.edlPickUp.status}
-                titre="Etat des lieux enlevement"
-                // sousTitre={getEnlevementDate()}
-                btn={{ titre: "Commencer edlPickUp", type: "edlPickUpAdmin" }}
-            />
+            {howRenderEdl(currentRevision, "edlPickUp")}
 
             {howRenderBackToGarage(currentRevision)}
 
@@ -141,11 +174,7 @@ function DetailRevisionAdmin() {
 
             {howRenderDropUp(currentRevision)}
 
-            <DetailRevision
-                status={currentRevision.edlDropUp.status}
-                titre="Etat des lieux restitution"
-                btn={{ titre: "Commencer edlDropUp", type: "edlDropUpAdmin" }}
-            />
+            {howRenderEdl(currentRevision, "edlDropUp")}
         </div>
     )
 }

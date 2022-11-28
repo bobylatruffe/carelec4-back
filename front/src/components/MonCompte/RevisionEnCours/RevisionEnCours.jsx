@@ -57,6 +57,7 @@ function RevisionEnCours({ revisionId, voitureId, email, setUserInfos }) {
                     />
 
                     <DetailRevision
+                        id={revisionId}
                         right="right"
                         status={currentRevision.edlPickUp.status}
                         titre="Etat des lieux de départ"
@@ -97,6 +98,7 @@ function RevisionEnCours({ revisionId, voitureId, email, setUserInfos }) {
                     />
 
                     <DetailRevision
+                        id={currentRevision._id}
                         status={currentRevision.edlDropUp.status}
                         right="right"
                         titre="Etat des lieux de restitution"

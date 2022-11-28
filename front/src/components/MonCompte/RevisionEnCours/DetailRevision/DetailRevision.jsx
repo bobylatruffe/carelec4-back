@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./DetailRevision.scss";
+import TrackEdl from "./TrackEdl/TrackEdl";
 import TrackLive from "./TrackLive/TrackLive";
 
 function setHandlerBtn(id, btn, handlerBtn, setCurrentRender) {
@@ -15,11 +16,11 @@ function setHandlerBtn(id, btn, handlerBtn, setCurrentRender) {
 
         case "edlPickUpAdmin":
             return (e) => {
-                setCurrentRender(<p>edlPickUpAdmin</p>);
+                setCurrentRender(<TrackEdl admin={true} setParentCurrentRender={setCurrentRender} id={id} type="edlPickUp" />);
             }
         case "edlPickUp":
             return (e) => {
-                setCurrentRender(<p>edlPickUp</p>);
+                setCurrentRender(<TrackEdl setParentCurrentRender={setCurrentRender} id={id} type="edlPickUp" />);
             }
 
         case "backToGarageAdmin":
@@ -42,11 +43,11 @@ function setHandlerBtn(id, btn, handlerBtn, setCurrentRender) {
 
         case "edlDropUpAdmin":
             return (e) => {
-                setCurrentRender(<p>edlDropUpAdmin</p>);
+                setCurrentRender(<TrackEdl admin={true} setParentCurrentRender={setCurrentRender} id={id} type="edlDropUp" />);
             }
         case "edlDropUp":
             return (e) => {
-                setCurrentRender(<p>edlDropUp</p>);
+                setCurrentRender(<TrackEdl setParentCurrentRender={setCurrentRender} id={id} type="edlDropUp" />);
             }
 
         default:

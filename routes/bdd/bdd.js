@@ -132,16 +132,6 @@ router.post("/updateRevisionStatus", async (req, resp) => {
     return resp.json(curentRevisionUpdated);
 });
 
-router.post("/updateRevisionEdl", async (req, resp) => {
-    const { revisionId, typeEdl, edls } = req.body;
-
-    const currentRevisionUpdated = await updateRevisionEdl(revisionId, typeEdl, edls);
-    if (!currentRevisionUpdated)
-        return resp.status(500).json({ message: `Impossible de modifier un etat des lieux, erreur interne` });
-
-    return resp.json(currentRevisionUpdated);
-});
-
 router.post("/addTacheInRevision", async (req, resp) => {
     const { revisionId, newTache } = req.body;
 
