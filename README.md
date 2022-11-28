@@ -50,7 +50,7 @@ Tests functionality that controls queries to the database.
 
 Go to the working folder and enter the following command in your terminal :
 ```
-npm build
+npm run build
 ```
 accessed from https://localhost:5000/
 
