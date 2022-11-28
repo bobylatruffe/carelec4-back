@@ -27,8 +27,8 @@ async function checkPendingCarAndEntretien(email, setUserInfos) {
             carData: pendingCar
         });
 
-        setSession("userInfos", userInfosUpdated);
-        setUserInfos(userInfosUpdated);
+        // setSession("userInfos", userInfosUpdated);
+        // setUserInfos(userInfosUpdated);
 
     } catch (err) {
         window.alert(err.message);
@@ -58,11 +58,11 @@ async function checkPendingCarAndEntretien(email, setUserInfos) {
 
     try {
         userInfosUpdated = await queryBdd("getUserInfos", { email });
-        setUserInfos(userInfosUpdated);
-        setSession("userInfos", userInfosUpdated);
         removeSession("currentCar");
         removeSession("currentEntretien");
         removeSession("pendingDateCreneau");
+        setUserInfos(userInfosUpdated);
+        setSession("userInfos", userInfosUpdated);
     } catch (err) {
         console.log(err.message);
         return null;
