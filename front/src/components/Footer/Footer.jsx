@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
 
 import "./Footer.css"
 
@@ -13,8 +13,8 @@ class Footer extends React.Component {
             <br></br>
             <div id='col'>
               <p>
-                <li><a href='/notre-garage'>Qui sommes-nous ?</a></li><br></br>
-                <li><a href='/contact'>Contactez-nous</a></li>
+                <li><a href='/NotreGarage'>Qui sommes-nous ?</a></li><br></br>
+                <li><a href='/Aides'>Contactez-nous</a></li>
               </p>
               <p>
                 <br></br>
