@@ -222,7 +222,8 @@ function toStandardiser(sdd, libelle) {
       motorisation: "",
       cv: null,
     },
-    enCours: libelle.toLowerCase().split(" "),
+    enCours:
+      libelle.toLowerCase().split(" "),
   }
 
   if (!setCv(structLibelle))
