@@ -105,7 +105,7 @@ class Chatbot extends React.Component {
 			<div id="chatbot_page" >
 				<form name="chatbot_conversation" >
 					Dialogue<br />
-					<textarea name="zone_texte_conversation" rows="20" cols="75"></textarea><br />
+					<textarea name="zone_texte_conversation" rows="20" cols="75">Bonjour, en quoi puis-je vous aider ?</textarea><br />
 					<br />
 				</form>
 				<form name="chatbot_entree" >
@@ -119,4 +119,4 @@ class Chatbot extends React.Component {
 	}
 }
 
-export default Chatbot ;
+export default Chatbot;
