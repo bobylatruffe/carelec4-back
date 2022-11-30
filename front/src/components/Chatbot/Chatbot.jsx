@@ -76,6 +76,7 @@ function echange() {
 	conversation = conversation + "CarElecBot : " + saisie_systeme + '\n\n'  // ajoute la réponse du bot à la conversation
 	document.chatbot_conversation.zone_texte_conversation.value = conversation  // met à jour l'affichage de la conversation complète du chatbot
 	document.chatbot_entree.zone_texte_entree.value = ""  // affichage de l'entrée utilisateur réinitialisée
+	document.chatbot_conversation.zone_texte_conversation.scrollTop = document.chatbot_conversation.zone_texte_conversation.scrollHeight;  // barre de défilement en bas
 }
 
 // fonction générant des réponses
