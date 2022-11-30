@@ -12,7 +12,7 @@ These instructions will get you a copy of the project up and running on your loc
 What things you need to install the software and how to install them
 
 ```
-Node.js®
+Node.js® version 18.11.0
 ```
 
 ### Installing
@@ -50,7 +50,7 @@ Tests functionality that controls queries to the database.
 
 Go to the working folder and enter the following command in your terminal :
 ```
-npm build
+npm run build
 ```
 accessed from https://localhost:5000/
 

@@ -42,7 +42,7 @@ class Contact extends React.Component {
     }
 
     render() {
-        const { nom, email, message } = this.state
+
         return (
             <div className='contact-container'>
                 <div className='content-n'>
@@ -55,13 +55,13 @@ class Contact extends React.Component {
                             <p><a href="tel:+33645789512">06 45 78 95 12</a></p>
                             <br></br>
                             <a href="https://www.facebook.com/">
-                                <img src={facebook} class="meme_hauteur" />
+                                <img src={facebook} class="meme_hauteur" alt="" />
                             </a>
                             <a href="https://www.instagram.com/">
-                                <img src={instagram} class="meme_hauteur" />
+                                <img src={instagram} class="meme_hauteur" alt="" />
                             </a>
                             <a href="https://twitter.com/">
-                                <img src={twitter} class="meme_hauteur" />
+                                <img src={twitter} class="meme_hauteur" alt="" />
                             </a>
                             <form onSubmit={this.handleSubmit}>
                                 <br></br>
@@ -102,7 +102,7 @@ class Contact extends React.Component {
                         </div>
                     </div>
                     <a href="https://www.google.fr/maps/">
-                        <img src={notreGarage3} className='img-right' />
+                        <img src={notreGarage3} className='img-right' alt="" />
                     </a>
                 </div>
             </div>

@@ -5,6 +5,8 @@ import "./Footer.css"
 
 class Footer extends React.Component {
   render() {
+
+    // eslint-disable-next-line 
     return (
       <nav className='footer'>
         <div className='footer-container'>
@@ -18,8 +20,8 @@ class Footer extends React.Component {
               </p>
               <p>
                 <br></br>
-                <li><a href='#'>Mentions légales</a></li><br></br>
-                <li><a href='#'>Conditions générales</a></li>
+                <li><a href='#versMention'>Mentions légales</a></li><br></br>
+                <li><a href='#versConditions'>Conditions générales</a></li>
               </p>
               <p>
                 <li><a href='/'>Nous sommes ouverts du lundi au vendredi <br></br>de 9h à 12h et de 13h à 17h30.<br></br>Le samedi de 9h à 12h.</a></li>
